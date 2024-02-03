@@ -25,3 +25,16 @@ Send a POST request to the `/analyze` endpoint with a JSON payload containing th
     "text": "Aku senang sekali hari ini"
 }
 ```
+
+Result
+
+```
+{
+    "result": [
+        {
+            "label": "negative",
+            "score": 0.9993744492530823
+        }
+    ]
+}
+```
