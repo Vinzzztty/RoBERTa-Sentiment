@@ -1,5 +1,5 @@
 from flask import Flask
-
+from src import roberta_model
 
 app = Flask(__name__)
 
@@ -10,7 +10,11 @@ def main():
 
 @app.route('/analyze')
 def sentiment_analyze():
-    return 'Sentiment Analyze'
+    word = "Aku senang sekali hari ini"
+
+    result = roberta_model.analyze_sentiment(dataframe=word)
+
+    return result
 
 
 if __name__ == '__main__':
