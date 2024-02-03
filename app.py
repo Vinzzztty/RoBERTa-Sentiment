@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from src import roberta_model
 
 app = Flask(__name__)
@@ -8,13 +8,22 @@ app = Flask(__name__)
 def main():
     return "<h1>Hello API </h1>"
 
-@app.route('/analyze')
+@app.route('/analyze', methods=['POST'])
 def sentiment_analyze():
-    word = "Aku senang sekali hari ini"
+    try:
+        data = request.get_json()
+        text = data['text']
+    
+        result = roberta_model.analyze_sentiment(dataframe=text)
 
-    result = roberta_model.analyze_sentiment(dataframe=word)
+        return jsonify({
+            'result': result
+        }), 200
 
-    return result
+    except Exception as e:
+        return jsonify({
+            'error': str(e)
+        }), 400
 
 
 if __name__ == '__main__':
