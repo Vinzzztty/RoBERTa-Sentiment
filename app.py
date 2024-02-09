@@ -17,7 +17,8 @@ def sentiment_analyze():
         result = roberta_model.analyze_sentiment(dataframe=text)
 
         return jsonify({
-            'result': result
+            'label': result[0]['label'],
+            'score': result[0]['score']
         }), 200
 
     except Exception as e:
